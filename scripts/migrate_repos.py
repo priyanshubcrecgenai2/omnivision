@@ -27,6 +27,7 @@ to_copy = [
     r for r in source_repos
     if not r['fork']
     and r['name'] != SOURCE_USER
+    and r['name'] != 'coaster_defect_detection'
     and r['name'] not in target_repos
 ]
 
