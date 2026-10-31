@@ -53,7 +53,7 @@ for idx, repo in enumerate(to_copy, 1):
     )
     
     created = False
-    retries = 3
+    retries = 5
     while retries > 0 and not created:
         try:
             with urllib.request.urlopen(create_req) as resp:
@@ -61,8 +61,8 @@ for idx, repo in enumerate(to_copy, 1):
                 print(f'   Repository {name} created on GitHub.')
         except urllib.error.HTTPError as e:
             if e.code == 403:
-                print(f'   Hit rate limit (403), waiting 60s before retry...')
-                time.sleep(60)
+                print(f'   Hit rate limit (403), waiting 70s before retry...')
+                time.sleep(70)
                 retries -= 1
             elif e.code == 422:
                 # Already exists
@@ -93,7 +93,7 @@ for idx, repo in enumerate(to_copy, 1):
         if os.path.exists(TMP_DIR):
             shutil.rmtree(TMP_DIR)
             
-    # Sleep 8 seconds between repo creations to avoid triggering secondary rate limit
-    time.sleep(8)
+    # Sleep 20 seconds between repo creations to avoid triggering secondary rate limit
+    time.sleep(20)
 
 print('\nFinished batch migration!')
